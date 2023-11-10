@@ -12,6 +12,10 @@ document.body.addEventListener('dblclick', () => {
     }
 })
 
+function daysInMonth (month, year) {
+    return new Date(year, month, 0).getDate();
+}
+
 function updateTime() {
     let d = new Date()
     let h = d.getHours()
@@ -22,25 +26,29 @@ function updateTime() {
     let month = d.getMonth()
     let year = d.getFullYear()
     let twoDigitYear = year.toString().substr(-2)
+    let dayInBirthMonth = daysInMonth($('Month').value, year)
 
     let newHours = h % 12
     let newDay = dayNames[day]
     let newMonth = monthNames[month]
+
     let newDate = `${newDay},${newMonth} ${date},${twoDigitYear}` 
 
-    let ageYear = year - ($('Year').value)
-    let ageMonth = 12 - ($('Month').value)
-    let ageDay = ($('Day').value) - date
-    let newAge = `${ageYear},${ageMonth},${ageDay}` 
+    let ageYear = Math.abs(year - ($('Year').value))
+    let ageMonth = Math.abs(month - $('Month').value)
+    let ageDay = Math.abs((dayInBirthMonth - $('Day').value) +  date)
+    let newAge = 0
 
     // console.log(day)
 
-    if (($('Month').value) >= month && ($('Day').value) >= date) {
+    if (($('Month').value) >= (month + 1) && ($('Day').value) >= date) {
         ageYear = year - ($('Year').value)
-        console.log(ageYear)
+        newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+        console.log(newAge)
     } else {
         ageYear = (year - ($('Year').value)) - 1
-        console.log(ageYear)
+        newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+        console.log(newAge)
     }
 
     // if ( h === 24 || h === 12 ) {
@@ -73,3 +81,7 @@ function updateTime() {
 }
 
 setInterval(updateTime, 1000)
+
+
+
+console.log(dinM)
