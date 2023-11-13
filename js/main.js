@@ -39,17 +39,58 @@ function updateTime() {
     let ageDay = Math.abs((dayInBirthMonth - $('Day').value) +  date)
     let newAge = 0
 
-    // console.log(day)
-
-    if (($('Month').value) >= (month + 1) && ($('Day').value) >= date) {
-        ageYear = year - ($('Year').value)
+    // Calculate YEAR....
+    if ($('Day').value > date) {
+        ageDay = (date + 30) - $('Day').value
+        ageMonth = (month - 1) - $('Month').value  
+        newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+        console.log(newAge)
+    } else if ($('Month').value > (month + 1)) {
+        ageMonth = (month + 12) - $('Month').value  
+        ageYear = (year - 1) - $('Year').value 
         newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
         console.log(newAge)
     } else {
-        ageYear = (year - ($('Year').value)) - 1
+        ageDay = date  - $('Day').value
+        ageMonth = month  - $('Month').value
+        ageYear = year - $('Year').value    
         newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
         console.log(newAge)
     }
+
+    // Calculate MONTH....
+    // if ($('Month').value > (month + 1)) {
+    //     ageMonth = (month + 12) - $('Month').value
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // } else {
+    //     ageMonth = month  - $('Month').value
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // }
+
+    // Calculate DAY....
+    // if ($('Day').value > date) {
+    //     ageDay = (date + 30) - $('Day').value
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // } else {
+    //     ageDay = date  - $('Day').value
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // }
+
+    // console.log(day)
+
+    // if (($('Month').value) >= (month + 1) && ($('Day').value) >= date) {
+    //     ageYear = year - ($('Year').value)
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // } else {
+    //     ageYear = (year - ($('Year').value)) - 1
+    //     newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
+    //     console.log(newAge)
+    // }
 
     // if ( h === 24 || h === 12 ) {
     //     newHours = `12`
