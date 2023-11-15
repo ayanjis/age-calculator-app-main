@@ -23,7 +23,8 @@ function updateTime() {
     let s = d.getSeconds()
     let day = d.getDay()
     let date = d.getDate()
-    let month = d.getMonth()
+    let fmonth = d.getMonth()
+    let month = fmonth + 1
     let year = d.getFullYear()
     let twoDigitYear = year.toString().substr(-2)
     let dayInBirthMonth = daysInMonth($('Month').value, year)
@@ -40,19 +41,20 @@ function updateTime() {
     let newAge = 0
 
     // Calculate YEAR....
-    if ($('Day').value > date) {
-        ageDay = (date + 30) - $('Day').value
-        ageMonth = (month - 1) - $('Month').value  
+
+    if ($('Day').value > date && $('Month').value > month) {
+        ageDay = Math.abs((date + 30) - $('Day').value)
+        ageMonth = Math.abs((month  - 1) - $('Month').value)  
         newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
-        console.log(newAge)
-    } else if ($('Month').value > (month + 1)) {
+        console.log(newAge)          
+    } else if ($('Month').value > month) {
         ageMonth = (month + 12) - $('Month').value  
-        ageYear = (year - 1) - $('Year').value 
+        ageYear = (year - 1) - $('Year').value
         newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
         console.log(newAge)
     } else {
-        ageDay = date  - $('Day').value
-        ageMonth = month  - $('Month').value
+        ageDay = Math.abs(date  - $('Day').value)
+        ageMonth = (month)  - $('Month').value
         ageYear = year - $('Year').value    
         newAge = `Y${ageYear},M${ageMonth},D${ageDay}`
         console.log(newAge)
